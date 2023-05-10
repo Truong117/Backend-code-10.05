@@ -28,8 +28,8 @@ const createOrder = async (req, res) => {
       name: req.body.name,
       phone: req.body.phone,
       email: req.body.email,
-      content: req.body.content,
-      title: req.body.title
+      address: req.body.address,
+      content: req.body.content
     });
     try {
       const newOrder = await order.save();
