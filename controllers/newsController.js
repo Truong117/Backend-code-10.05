@@ -15,15 +15,15 @@ const addNews = async (req, res) => {
       return res.status(400).json({ error: 'No image in the request' });
     }
 
-    for (let key = 0; key < req.files.length; key++) {
-      const filePath = req.files[key].destination + req.files[key].filename;
-      const imageKey = images.findIndex((img) => Object.keys(img)[0] === `image${key}`);
-      if (imageKey !== -1) {
-        images[imageKey][`image${key}`] = serverUrl+ "/"+ filePath.split(' ').join('-');
+    for (let key = 0; key < 5; key++) {
+      const file = req.files[key];
+      if (file) {
+        const filePath = file.destination + file.filename;
+        images.push({ [`image${key}`]: serverUrl + "/" + filePath.split(' ').join('-')});
       } else {
-        images.push({ [`image${key}`]: serverUrl+ "/"+ filePath.split(' ').join('-') });
+        images.push({ [`image${key}`]: "" });
       }
-    }
+    }    
     let news = new News({
       title: req.body.title,
       description1: req.body.description1,
@@ -117,7 +117,7 @@ const updateNews = async (req, res) => {
     }
     const images = news.images;
     if (req.files && req.files.length > 0) {
-      for (let i = 0; i < req.files.length; i++) {
+      for (let i = 0; i < 5; i++) {
         const filePath = req.files[i].destination + req.files[i].filename;
         const imageIndex = req.body.imageIndex[i];
         images[imageIndex] = { [`image${imageIndex}`]: serverUrl + "/"+ filePath.split(' ').join('-')  };
