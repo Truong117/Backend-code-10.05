@@ -118,9 +118,10 @@ const updateNews = async (req, res) => {
     const images = news.images;
     if (req.files && req.files.length > 0) {
       for (let i = 0; i < 5; i++) {
+        if (req.files[i] && req.files[i].destination && req.files[i].filename){
         const filePath = req.files[i].destination + req.files[i].filename;
         const imageIndex = req.body.imageIndex[i];
-        images[imageIndex] = { [`image${imageIndex}`]: serverUrl + "/"+ filePath.split(' ').join('-')  };
+        images[imageIndex] = { [`image${imageIndex}`]: serverUrl + "/"+ filePath.split(' ').join('-')  };}
       }
     }
     news = await News.findByIdAndUpdate(id, { $set: updatedFields, images }, { new: true });

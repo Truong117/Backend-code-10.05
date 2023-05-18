@@ -70,7 +70,7 @@ POST     /api/v1/users/logout
 POST     /api/v1/news
 GET      /api/v1/news
 GET      /api/v1/news/:id
-PATCH    /api/v1/users/:id (title, description, imageIndex, images)
+PATCH    /api/v1/news/:id (title, description, imageIndex, images)
 DELETE   /api/v1/news/:id
 ```
 #### Orders
